@@ -72,13 +72,13 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <div class="breadcrumb-inner">
-                                <h1>useEffect vs useLayoutEffect</h1>
+                                <h1>Super Simple Start to ESModules in Node.js</h1>
                                 <ul class="breadcrumb-links">
                                     <li>
                                         <a href="index.html">Home</a>
                                     </li>
                                     <li class="active">
-                                        useEffect vs useLayoutEffect 8
+                                        Super Simple Start to ESModules in Node.js
                                     </li>
                                 </ul>
                             </div>
@@ -95,37 +95,36 @@
                         <div class="col-lg-8">
                             <div class="blog-post-single">
                                 <div class="blog-post-img">
-                                    <img src="img/blog/Copia de photo-1474718723952-48d2a016108f.jpeg" alt="Blog Post Image" class="img-fluid">
+                                    <img src="img/blog/Copia de photo-1617804309291-2f2d3734b471 copia.png" alt="Blog Post Image" class="img-fluid">
                                 </div>
                                 <div class="blog-text">
-                                    <h4>useEffect vs useLayoutEffect</h4>
+                                    <h4>Super Simple Start to ESModules in Node.js</h4>
                                     <div class="author-meta">
                                         <a href="#"><span class="far fa-user"></span>By Alkis Melotis</a>
-                                        <a href="#"><span class="far fa-calendar-alt"></span>17 November 2021</a>
+                                        <a href="#"><span class="far fa-calendar-alt"></span>13 November 2021</a>
                                     </div>
                                     <p>
-                                        Both of these can be used to do basically the same thing, but they have slightly different use cases. So here are some rules for you to consider when deciding which React Hook to use.
+                                        On April 30th 2021, Node v10 will officially reach it's "end of life" (learn more on the Node Releases page). This is exciting because it means that every supported version of the Node.js JavaScript runtime will support Node's official EcmaScript Modules! There are mixed feelings on this change (some would have preferred we stick with CommonJS in the Node ecosystem), but whatever your opinion on the matter the fact is that ESModules are here and they are the future. So let's learn how to use them in a Node.js environment.
                                     </p>
-                                    <h5>useEffect</h5>
-                                    <p>
-                                        99% of the time this is what you want to use. When hooks are stable and if you refactor any of your class components to use hooks, you'll likely move any code from componentDidMount, componentDidUpdate, and componentWillUnmount to useEffect.
-                                    </p>
-                                    <p>The one catch is that this runs after react renders your component and ensures that your effect callback does not block browser painting. This differs from the behavior in class components where componentDidMount and componentDidUpdate run synchronously after rendering. It's more performant this way and most of the time this is what you want.</p>
-                                    <p>However, if your effect is mutating the DOM (via a DOM node ref) and the DOM mutation will change the appearance of the DOM node between the time that it is rendered and your effect mutates it, then you don't want to use useEffect. You'll want to use useLayoutEffect. Otherwise the user could see a flicker when your DOM mutations take effect. This is pretty much the only time you want to avoid useEffect and use useLayoutEffect instead.</p>
-                                    <h5>useLayoutEffect</h5>
-                                    <p>This runs synchronously immediately after React has performed all DOM mutations. This can be useful if you need to make DOM measurements (like getting the scroll position or other styles for an element) and then make DOM mutations or trigger a synchronous re-render by updating state.</p>
-                                    <p>As far as scheduling, this works the same way as componentDidMount and componentDidUpdate. Your code runs immediately after the DOM has been updated, but before the browser has had a chance to "paint" those changes (the user doesn't actually see the updates until after the browser has repainted).</p>
-                                    <h5>Summary</h5>
-                                    <p style="list-style:disc outside none; display:list-item;">useLayoutEffect: If you need to mutate the DOM and/or do need to perform measurements</p>
-                                    <p style="list-style:disc outside none; display:list-item;">useEffect: If you don't need to interact with the DOM at all or your DOM changes are unobservable (seriously, most of the time you should use this).</p>
-                                    <h5>One special case</h5>
-                                    <p>One other situation you might want to use useLayoutEffect instead of useEffect is if you're updating a value (like a ref) and you want to make sure it's up-to-date before any other code runs. For example:</p>
+                                    <p>First, we need the JavaScript we want to run:</p>
                                     <div class="blog-post-img">
-                                        <img src="img/blog/blog-1-1.png" alt="Blog Post Image" class="img-fluid">
+                                        <img src="img/blog/blog-2-1.png" alt="Blog Post Image" class="img-fluid">
                                     </div>
-                                    <p>So in situations like that, the solution is useLayoutEffect.</p>
-                                    <h5>Conclusion</h5>
-                                    <p>It's all about defaults. The default behavior is to let the browser re-paint based on DOM updates before React runs your code. This means your code won't block the browser and the user sees updates to the DOM sooner. So stick with useEffect most of the time.</p>
+                                    <p>Next, let's make a JavaScript file that imports this and runs it:</p>
+                                    <div class="blog-post-img">
+                                        <img src="img/blog/blog-2-2.png" alt="Blog Post Image" class="img-fluid">
+                                    </div>
+                                    <p>Great, now let's try to run it:</p>
+                                    <p>Here's the thing. The Node.js project will sometimes experience breaking changes and that's reasonable, but breaking the module system is just a non-starter. So using ESM is an opt-in. You can either opt-in a single file by changing from .js to .mjs, or you can opt-in an entire directory by adding a package.json with "type": "module".</p>
+                                    <p>Let's go with the second option so we don't have to rename all our files. Put this in a package.json:</p>
+                                    <div class="blog-post-img">
+                                        <img src="img/blog/blog-2-3.png" alt="Blog Post Image" class="img-fluid">
+                                    </div>
+                                    <p>Now let's run it:</p>
+                                    <div class="blog-post-img">
+                                        <img src="img/blog/blog-2-4.png" alt="Blog Post Image" class="img-fluid">
+                                    </div>
+                                    <p>That's it. We've got native ESM running in Node.js.</p>
                                 </div>
                             </div>
                         </div>
